@@ -6,9 +6,9 @@ const Cart = () => {
     <div className='container container--cart'>
       <div className='cart'>
         <div className='cart__top'>
-          <h2>Корзина</h2>
+          <h2>Shopping Cart</h2>
           <div className='cart__clear'>
-            <span>Очистить корзину</span>
+            <span>Empty shopping cart</span>
           </div>
         </div>
         <div className='content__items'>
@@ -21,8 +21,8 @@ const Cart = () => {
               />
             </div>
             <div className='cart__item-info'>
-              <h3>Сырный цыпленок</h3>
-              <p>тонкое тесто, 26 см.</p>
+              <h3>cheese chicken</h3>
+              <p>thin dough, 26 sm.</p>
             </div>
             <div className='cart__item-count'>
               <div className='button button--outline button--circle cart__item-count-minus'>
@@ -75,11 +75,11 @@ const Cart = () => {
           <div className='cart__bottom-details'>
             <span>
               {' '}
-              Всего пицц: <b>3 шт.</b>{' '}
+              Total pizzas: <b>3 шт.</b>{' '}
             </span>
             <span>
               {' '}
-              Сумма заказа: <b>900 ₽</b>{' '}
+              Order total <b>900 ₽</b>{' '}
             </span>
           </div>
           <div className='cart__bottom-buttons'>
@@ -87,10 +87,10 @@ const Cart = () => {
               to='/'
               className='button button--outline button--add go-back-btn'
             >
-              <span>Вернуться назад</span>
+              <span>Go back</span>
             </Link>
             <div className='button pay-btn'>
-              <span>Оплатить сейчас</span>
+              <span>Checkout</span>
             </div>
           </div>
         </div>
