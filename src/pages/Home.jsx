@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import Pagination from '../components/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
@@ -29,10 +29,8 @@ const Home = () => {
   const isMounted = useRef(false);
 
   const { searchValue } = useContext(SearchContext);
-  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortType = sort.sortProperty;
     const search = searchValue ? `search=${searchValue}` : '';
