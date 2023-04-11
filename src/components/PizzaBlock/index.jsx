@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-const ProductCard = ({ title, price, imageUrl, sizes, types }) => {
-  const [count, setCount] = useState(0);
+import { addItem } from '../../redux/slices/cartSlice';
+
+const typeNames = ['thin dough', 'normal'];
+const sizeValues = [26, 30, 40];
+
+const ProductCard = ({ id, title, price, imageUrl, sizes, types }) => {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => obj.id === id),
+  );
+  const addedItem = cartItem ? cartItem.count : 0;
   const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(0);
 
-  const typeName = ['thin dough', 'normal'];
-
   const onClickAdd = () => {
-    setCount(() => count + 1);
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      type: typeNames[activeType],
+      size: sizeValues[activeSize],
+    };
+    dispatch(addItem(item));
   };
   return (
     <div className='pizza-block-wrapper'>
@@ -23,7 +39,7 @@ const ProductCard = ({ title, price, imageUrl, sizes, types }) => {
                 key={typeId}
                 className={activeType === typeId ? 'active' : ''}
               >
-                {typeName[typeId]}
+                {typeNames[typeId]}
               </li>
             ))}
           </ul>
@@ -58,7 +74,7 @@ const ProductCard = ({ title, price, imageUrl, sizes, types }) => {
               />
             </svg>
             <span>ADD</span>
-            <i>{count}</i>
+            {addedItem > 0 && <i>{addedItem}</i>}
           </button>
         </div>
       </div>
