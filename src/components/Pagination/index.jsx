@@ -4,8 +4,6 @@ import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss';
 
 const Pagination = ({ currentPage, onChangePage }) => {
-  console.log();
-
   const handleClick = (event) => {
     onChangePage(event.selected + 1);
     window.scrollTo(0, 0);

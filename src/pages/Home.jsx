@@ -66,7 +66,6 @@ const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
-      console.log('isSearch.current', isSearch.current);
       fetchData();
     }
     isSearch.current = false;
