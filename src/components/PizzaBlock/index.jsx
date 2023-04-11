@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 
 const typeNames = ['thin dough', 'normal'];
-const sizeValues = [26, 30, 40];
 
 const ProductCard = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ const ProductCard = ({ id, title, price, imageUrl, sizes, types }) => {
       price,
       imageUrl,
       type: typeNames[activeType],
-      size: sizeValues[activeSize],
+      size: sizes[activeSize],
     };
     dispatch(addItem(item));
   };
