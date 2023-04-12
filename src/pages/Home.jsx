@@ -13,22 +13,20 @@ import {
   setCategoryId,
   setCurrentPage,
   setFilters,
+  stateFilters,
 } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, selectPizza } from '../redux/slices/pizzaSlice';
 import { sortOptions } from '../components/Sort';
 
 const Home = () => {
   const navigate = useNavigate();
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter,
-  );
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(stateFilters);
+  const { items, status } = useSelector(selectPizza);
 
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-
-  const { searchValue } = useContext(SearchContext);
 
   const fetchData = async () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -130,7 +128,6 @@ const Home = () => {
           {status === 'loading' ? skeletons : pizzas}
         </div>
       )}
-
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );

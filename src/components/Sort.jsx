@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setTypeSort } from '../redux/slices/filterSlice';
+import { setTypeSort, stateFilters } from '../redux/slices/filterSlice';
 
 export const sortOptions = [
   { name: 'popularity', sortProperty: 'rating' },
@@ -11,11 +11,9 @@ export const sortOptions = [
 
 const Sort = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const sort = useSelector((state) => state.filter.sort);
+  const { sort } = useSelector(stateFilters);
   const dispatch = useDispatch();
   const sortRef = useRef();
-
-  // const sortName = sortOptions[sortType].name;
 
   const onClicked = (obj) => {
     dispatch(setTypeSort(obj));
