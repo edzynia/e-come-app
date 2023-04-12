@@ -1,18 +1,20 @@
-import { useEffect, uaeState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { fetchPizza } from '../redux/slices/pizzaSlice';
 
 const FullPizza = () => {
+  const dispatch = useDispatch();
+  const singlePizza = useSelector((state) => state.pizza.item);
   const { id } = useParams();
   const [pizza, setPizza] = useState();
   const navigate = useNavigate();
+
   const fetchItem = async () => {
     try {
-      const { data } = await axios.get(
-        'https://6420515725cb65721046ecff.mockapi.io/items/' + id,
-      );
-      setPizza(data);
+      dispatch(fetchPizza({ id }));
+      setPizza(singlePizza);
     } catch (error) {
       console.warn(error);
       navigate('/');

@@ -92,11 +92,7 @@ const Home = () => {
       }
       return false;
     })
-    .map((obj) => (
-      <Link key={obj.id} to={`/pizza/${obj.id}`}>
-        <ProductCard {...obj} />
-      </Link>
-    ));
+    .map((obj) => <ProductCard key={obj.id} {...obj} />);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
