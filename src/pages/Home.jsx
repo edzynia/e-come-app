@@ -1,14 +1,13 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Pagination from '../components/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import ProductCard from '../components/PizzaBlock';
-import { SearchContext } from '../App';
 import {
   setCategoryId,
   setCurrentPage,
@@ -93,7 +92,11 @@ const Home = () => {
       }
       return false;
     })
-    .map((obj) => <ProductCard key={obj.id} {...obj} />);
+    .map((obj) => (
+      <Link key={obj.id} to={`/pizza/${obj.id}`}>
+        <ProductCard {...obj} />
+      </Link>
+    ));
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
