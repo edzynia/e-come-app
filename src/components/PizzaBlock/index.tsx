@@ -6,7 +6,23 @@ import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 
 const typeNames = ['thin dough', 'normal'];
 
-const ProductCard = ({ id, title, price, imageUrl, sizes, types }) => {
+type ProductCardProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+const ProductCard: React.FC<ProductCardProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const addedItem = cartItem ? cartItem.count : 0;

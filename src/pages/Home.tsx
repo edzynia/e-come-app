@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Pagination from '../components/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Categories from '../components/Categories';
@@ -17,7 +17,7 @@ import {
 import { fetchPizzas, selectPizza } from '../redux/slices/pizzaSlice';
 import { sortOptions } from '../components/Sort';
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const { categoryId, sort, currentPage, searchValue } =
     useSelector(stateFilters);
@@ -33,6 +33,7 @@ const Home = () => {
     const search = searchValue ? `search=${searchValue}` : '';
 
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         category,
         sortType,
@@ -86,19 +87,19 @@ const Home = () => {
   ));
 
   const pizzas = items
-    ?.filter((obj) => {
+    ?.filter((obj: any) => {
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
       }
       return false;
     })
-    .map((obj) => <ProductCard key={obj.id} {...obj} />);
+    .map((obj: any) => <ProductCard key={obj.id} {...obj} />);
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 

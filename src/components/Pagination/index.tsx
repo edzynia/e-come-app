@@ -3,8 +3,13 @@ import ReactPaginate from 'react-paginate';
 
 import styles from './Pagination.module.scss';
 
-const Pagination = ({ currentPage, onChangePage }) => {
-  const handleClick = (event) => {
+type PaginationProps = { currentPage: number; onChangePage: any };
+
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  onChangePage,
+}) => {
+  const handleClick = (event: any) => {
     onChangePage(event.selected + 1);
     window.scrollTo(0, 0);
   };
@@ -18,7 +23,7 @@ const Pagination = ({ currentPage, onChangePage }) => {
       pageRangeDisplayed={8}
       pageCount={2}
       forcePage={currentPage - 1}
-      renderOnZeroPageCount={null}
+      // renderOnZeroPageCount={null}
     />
   );
 };

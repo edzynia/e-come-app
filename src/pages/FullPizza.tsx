@@ -1,20 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { fetchPizza } from '../redux/slices/pizzaSlice';
 
-const FullPizza = () => {
-  const dispatch = useDispatch();
-  const singlePizza = useSelector((state) => state.pizza.item);
+const FullPizza: React.FC = () => {
+  // const dispatch = useDispatch();
+  // const { item: singlePizza } = useSelector((state) => state.pizza);
   const { id } = useParams();
-  const [pizza, setPizza] = useState();
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
   const navigate = useNavigate();
 
   const fetchItem = async () => {
+    // dispatch(fetchPizza({ id }));
+    // setPizza(singlePizza);
+
     try {
-      dispatch(fetchPizza({ id }));
-      setPizza(singlePizza);
+      const { data } = await axios.get(
+        `https://6420515725cb65721046ecff.mockapi.io/items/${id}`,
+      );
+      setPizza(data);
     } catch (error) {
       console.warn(error);
       navigate('/');
@@ -26,13 +36,13 @@ const FullPizza = () => {
   }, []);
 
   if (!pizza) {
-    return 'Loading...';
+    return <>Loading...</>;
   }
 
   return (
     <div className='container'>
-      <img src={pizza.imageUrl} />
-      <h2>{pizza.title}</h2>
+      <img className='pizza-block__image' src={pizza.imageUrl} alt='Pizza' />
+      <h4 className='pizza-block__title'>{pizza.title}</h4>
       <p>
         This hook returns the current location object. This can be useful if
         you'd like to perform some side effect whenever the current location
