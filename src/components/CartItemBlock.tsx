@@ -1,8 +1,12 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { minusItem, removeItem, addItem } from '../redux/slices/cartSlice';
+import {
+  minusItem,
+  removeItem,
+  addItem,
+  CartItem,
+} from '../redux/slices/cartSlice';
 
 type CartItemProps = {
   id: string;
@@ -14,7 +18,7 @@ type CartItemProps = {
   size: number;
 };
 
-const CartItem: React.FC<CartItemProps> = ({
+const CartItemBlock: React.FC<CartItemProps> = ({
   id,
   title,
   count,
@@ -26,11 +30,11 @@ const CartItem: React.FC<CartItemProps> = ({
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    return dispatch(addItem({ id }));
+    return dispatch(addItem({ id } as CartItemProps));
   };
 
   const onClickMinus = () => {
-    return dispatch(minusItem({ id }));
+    return dispatch(minusItem({ id } as CartItem));
   };
 
   const onClickRemove = () => {
@@ -52,7 +56,7 @@ const CartItem: React.FC<CartItemProps> = ({
           </p>
         </div>
         <div className='cart__item-count'>
-          <div
+          <button
             onClick={onClickMinus}
             className='button button--outline button--circle cart__item-count-minus'
           >
@@ -72,9 +76,9 @@ const CartItem: React.FC<CartItemProps> = ({
                 // fill='#EB5A1E'
               ></path>
             </svg>
-          </div>
+          </button>
           <b>{count}</b>
-          <div
+          <button
             className='button button--outline button--circle cart__item-count-plus'
             onClick={onClickPlus}
           >
@@ -94,17 +98,17 @@ const CartItem: React.FC<CartItemProps> = ({
                 fill='#EB5A1E'
               ></path>
             </svg>
-          </div>
+          </button>
         </div>
         <div className='cart__item-price'>
           <b>{count * price}</b>
         </div>
         <div className='cart__item-remove' onClick={onClickRemove}>
-          <div className='button button--outline button--circle'>x</div>
+          <button className='button button--outline button--circle'>x</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default CartItem;
+export default CartItemBlock;

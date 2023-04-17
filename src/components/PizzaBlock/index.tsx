@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
+import {
+  addItem,
+  CartItem,
+  selectCartItemById,
+} from '../../redux/slices/cartSlice';
 
 const typeNames = ['thin dough', 'normal'];
 
@@ -30,13 +34,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const [activeSize, setActiveSize] = useState(0);
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 0,
     };
     dispatch(addItem(item));
   };
@@ -73,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </ul>
         </div>
         <div className='pizza-block__bottom'>
-          <div className='pizza-block__price'>от {price} ₽</div>
+          <div className='pizza-block__price'>sek {price}</div>
           <button
             onClick={onClickAdd}
             className='button button--outline button--add'
