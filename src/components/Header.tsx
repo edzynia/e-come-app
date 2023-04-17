@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import LogoIcon from '../assets/img/pizza-logo.svg';
-import Search from './Search';
+import { Search } from './';
 import { selectCart } from '../redux/slices/cartSlice';
 
 const Header: React.FC = () => {

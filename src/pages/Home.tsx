@@ -5,10 +5,7 @@ import { useAppDispatch } from '../redux/store';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Categories from '../components/Categories';
-import Sort from '../components/SortPopup';
-import ProductCard from '../components/PizzaBlock';
+import { Skeleton, Categories, SortPopup, PizzaBlock } from '../components';
 import {
   setCategoryId,
   setCurrentPage,
@@ -17,8 +14,8 @@ import {
 } from '../redux/slices/filterSlice';
 import { selectPizza } from '../redux/slices/pizzaSlice';
 import { fetchPizzas } from '../redux/actions/asyncActions';
-import { sortOptions } from '../components/SortPopup';
 import { SearchPizzaParams } from '../redux/types';
+import { sortOptions } from '../components/SortPopup';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -99,7 +96,7 @@ const Home: React.FC = () => {
       }
       return false;
     })
-    .map((obj: any) => <ProductCard key={obj.id} {...obj} />);
+    .map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
 
   const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
@@ -116,7 +113,7 @@ const Home: React.FC = () => {
           categoryId={categoryId}
           onChangeCategory={onChangeCategory}
         />
-        <Sort value={sort} />
+        <SortPopup value={sort} />
       </div>
       <h2 className='content__title'>All Pizzas</h2>
       {status === 'error' ? (
