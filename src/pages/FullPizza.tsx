@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { fetchPizza } from '../redux/slices/pizzaSlice';
+import { fetchPizza } from '../redux/actions/asyncActions';
 
 const FullPizza: React.FC = () => {
   // const dispatch = useDispatch();

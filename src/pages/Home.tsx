@@ -15,9 +15,10 @@ import {
   setFilters,
   stateFilters,
 } from '../redux/slices/filterSlice';
-import { fetchPizzas, selectPizza } from '../redux/slices/pizzaSlice';
+import { selectPizza } from '../redux/slices/pizzaSlice';
+import { fetchPizzas } from '../redux/actions/asyncActions';
 import { sortOptions } from '../components/SortPopup';
-import { SearchPizzaParams } from '../redux/slices/pizzaSlice';
+import { SearchPizzaParams } from '../redux/types';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();

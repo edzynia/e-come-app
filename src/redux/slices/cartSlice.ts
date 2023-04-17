@@ -1,26 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { getFromLocalStorage } from '../../utils/getFromLocalStorage';
+import { calcTotatCount, calcTotatPrice } from '../../utils/calcTotat';
+import { CartItem, CartSliceState } from '../types';
 
-export type CartItem = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  size: number;
-  count: number;
-};
-
-export interface CartSliceState {
-  totalPrice: number;
-  totalCount: number;
-  items: CartItem[];
-}
+const { items, totalCount, totalPrice } = getFromLocalStorage();
 
 const initialState: CartSliceState = {
-  totalPrice: 0,
-  totalCount: 0,
-  items: [],
+  totalPrice,
+  totalCount,
+  items,
 };
 
 const cartSlice = createSlice({
@@ -37,18 +26,14 @@ const cartSlice = createSlice({
           count: 1,
         });
       }
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
-      state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
+      state.totalPrice = calcTotatPrice(state.items);
+      state.totalCount = calcTotatCount(state.items);
     },
 
     removeItem(state, action: PayloadAction<string>) {
       state.items = state.items.filter((obj) => obj.id !== action.payload);
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
-      state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
+      state.totalPrice = calcTotatPrice(state.items);
+      state.totalCount = calcTotatCount(state.items);
     },
 
     clearItems(state) {
@@ -62,10 +47,8 @@ const cartSlice = createSlice({
       if (findItem && findItem.count > 0) {
         findItem.count--;
       }
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
-      state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
+      state.totalPrice = calcTotatPrice(state.items);
+      state.totalCount = calcTotatCount(state.items);
     },
   },
 });
