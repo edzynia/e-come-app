@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { fetchPizza } from '../redux/actions/asyncActions';
+// import { fetchPizza } from '../redux/actions/asyncActions';
 
 const FullPizza: React.FC = () => {
   // const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const FullPizza: React.FC = () => {
 
   useEffect(() => {
     fetchItem();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!pizza) {

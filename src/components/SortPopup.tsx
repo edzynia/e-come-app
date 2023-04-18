@@ -48,6 +48,7 @@ const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
     return () => {
       document.body.removeEventListener('click', handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

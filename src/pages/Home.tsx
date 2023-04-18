@@ -60,6 +60,7 @@ const Home: React.FC = () => {
       );
       isSearch.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -68,6 +69,7 @@ const Home: React.FC = () => {
       fetchData();
     }
     isSearch.current = false;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   useEffect(() => {
@@ -83,6 +85,7 @@ const Home: React.FC = () => {
       }
     }
     isMounted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, index) => (
@@ -100,6 +103,7 @@ const Home: React.FC = () => {
 
   const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChangePage = (number: number) => {
